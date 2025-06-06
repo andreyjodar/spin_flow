@@ -1,3 +1,5 @@
+import 'package:uuid/uuid.dart';
+
 class TipoManutencaoDTO {
   String? id;
   String nome;
@@ -5,9 +7,9 @@ class TipoManutencaoDTO {
   bool ativo;
 
   TipoManutencaoDTO({
-    this.id,
+    String? id,
     required this.nome,
     required this.descricao,
     required this.ativo,
-  });
+  }) : id = id ?? const Uuid().v4();
 }

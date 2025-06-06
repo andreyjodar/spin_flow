@@ -1,3 +1,5 @@
+import 'package:uuid/uuid.dart';
+
 class AlunoDTO {
   String? id;
   String nome;
@@ -11,7 +13,7 @@ class AlunoDTO {
   bool ativo;
 
   AlunoDTO({
-    this.id,
+    String? id,
     required this.nome,
     required this.email,
     required this.dataNascimento,
@@ -21,5 +23,5 @@ class AlunoDTO {
     required this.perfilFacebook,
     required this.perfilTiktok,
     required this.ativo,
-  });
+  }) : id = id ?? const Uuid().v4();
 }

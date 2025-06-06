@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project2/telas/form_aluno.dart';
+import 'package:flutter_project2/telas/form_bike.dart';
 import 'package:flutter_project2/telas/form_fabricante.dart';
 import 'package:flutter_project2/telas/form_sala.dart';
 import 'package:flutter_project2/telas/form_tipo-manutencao.dart';
@@ -43,7 +44,8 @@ class MyApp extends StatelessWidget {
         '/cadastro_aluno': (context) => AlunoForm(),
         '/cadastro_fabricante': (context) => FabricanteForm(),
         '/cadastro_sala': (context) => SalaForm(),
-        '/cadastro_tipo_manutencao': (context) => TipoManutencaoForm()
+        '/cadastro_tipo_manutencao': (context) => TipoManutencaoForm(),
+        '/cadastro_bike': (context) => BikeForm()
       },
     );
   }

@@ -1,3 +1,5 @@
+import 'package:uuid/uuid.dart';
+
 class VideoAulaDTO {
   String? id;
   String nome;
@@ -5,11 +7,11 @@ class VideoAulaDTO {
   bool ativo;
 
   VideoAulaDTO({
-    this.id,
+    String? id,
     required this.nome,
     required this.linkVideo,
     required this.ativo,
-  });
+  }) : id = id ?? const Uuid().v4();
 
   // Método para converter para Map (útil para enviar a APIs, banco de dados)
   Map<String, dynamic> toMap() {
