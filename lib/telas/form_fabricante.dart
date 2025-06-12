@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../dto/dto_fabricante.dart';
+import 'package:flutter_application_1/dto/dto_fabricante..dart';
 
 class FabricanteForm extends StatefulWidget {
   const FabricanteForm({Key? key}) : super(key: key);
@@ -90,6 +90,7 @@ class _FabricanteFormState extends State<FabricanteForm> {
                       const SnackBar(
                           content: Text('Fabricante cadastrado com sucesso!')),
                     );
+                    Navigator.pushNamed(context, '/lista_fabricante');
                   }
                 },
                 child: const Text('Salvar'),

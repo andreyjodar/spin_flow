@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../dto/dto_video_aula.dart';
+import 'package:flutter_application_1/dto/dto_video_aula.dart';
 
 class FormVideoAula extends StatefulWidget {
   final VideoAulaDTO? videoAulaInicial;

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-
-import 'telas/form_aluno.dart';
-import 'telas/form_bike.dart';
-import 'telas/form_fabricante.dart';
-import 'telas/form_sala.dart';
-import 'telas/form_tipo-manutencao.dart';
-import 'telas/form_video_aula.dart';
-import 'telas/tela_dashboard.dart';
+import 'package:flutter_application_1/telas/form_aluno.dart';
+import 'package:flutter_application_1/telas/form_bike.dart';
+import 'package:flutter_application_1/telas/form_fabricante.dart';
+import 'package:flutter_application_1/telas/form_sala.dart';
+import 'package:flutter_application_1/telas/form_tipo-manutencao.dart';
+import 'package:flutter_application_1/telas/form_video_aula.dart';
+import 'package:flutter_application_1/telas/lista_fabricante.dart';
+import 'package:flutter_application_1/telas/tela_dashboard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,7 +46,8 @@ class MyApp extends StatelessWidget {
         '/cadastro_fabricante': (context) => FabricanteForm(),
         '/cadastro_sala': (context) => SalaForm(),
         '/cadastro_tipo_manutencao': (context) => TipoManutencaoForm(),
-        '/cadastro_bike': (context) => BikeForm()
+        '/cadastro_bike': (context) => BikeForm(),
+        '/lista_fabricante': (context) => ListaFabricante()
       },
     );
   }
