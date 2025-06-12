@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project2/dto/dto_fabricante..dart';
+import '../dto/dto_fabricante.dart';
 
 class FabricanteForm extends StatefulWidget {
   const FabricanteForm({Key? key}) : super(key: key);

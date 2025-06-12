@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project2/dto/dto_tipo_manutencao.dart';
+import '../dto/dto_tipo_manutencao.dart';
 
 class TipoManutencaoForm extends StatefulWidget {
   const TipoManutencaoForm({Key? key}) : super(key: key);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project2/dto/dto_aluno.dart';
+
+import '../dto/dto_aluno.dart';
 
 class AlunoForm extends StatefulWidget {
   const AlunoForm({Key? key}) : super(key: key);

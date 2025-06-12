@@ -1,4 +1,4 @@
-import 'package:flutter_project2/dto/dto_fabricante..dart';
+import '../dto/dto_fabricante.dart';
 
 class FabricanteRepository {
   final List<FabricanteDTO> _fabricantes = [

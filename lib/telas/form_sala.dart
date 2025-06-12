@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project2/dto/dto_sala.dart';
+
+import '../dto/dto_sala.dart';
 
 class SalaForm extends StatefulWidget {
   const SalaForm({Key? key}) : super(key: key);
