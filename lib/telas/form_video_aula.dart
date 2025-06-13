@@ -21,10 +21,6 @@ class _FormVideoAulaState extends State<FormVideoAula> {
   @override
   void initState() {
     super.initState();
-
-    // Inicializa os controladores com valores do DTO se existir
-    _idController =
-        TextEditingController(text: widget.videoAulaInicial?.id ?? '');
     _nomeController =
         TextEditingController(text: widget.videoAulaInicial?.nome ?? '');
     _linkVideoController =
@@ -43,13 +39,10 @@ class _FormVideoAulaState extends State<FormVideoAula> {
   void _salvar() {
     if (_formKey.currentState!.validate()) {
       final videoAulaDTO = VideoAulaDTO(
-        id: _idController.text.isEmpty ? null : _idController.text,
         nome: _nomeController.text,
         linkVideo: _linkVideoController.text,
         ativo: _ativo,
       );
-
-      print('Vídeo Aula DTO: ${videoAulaDTO.toMap()}');
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Vídeo Aula salva com sucesso!')),

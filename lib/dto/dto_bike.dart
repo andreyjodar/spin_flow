@@ -1,14 +1,14 @@
 class BikeDTO {
-  String? id;
+  int? id;
   String nome;
   String numeroSerie;
-  String fabricanteId; // ID do Fabricante (Associação 1:1)
+  int? fabricanteId; // ID do Fabricante (Associação 1:1)
   DateTime dataAquisicao;
   DateTime dataCadastroSistema;
   bool ativo;
 
   BikeDTO({
-    String? id,
+    int? id,
     required this.nome,
     required this.numeroSerie,
     required this.fabricanteId,

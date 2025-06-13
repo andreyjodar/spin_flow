@@ -1,7 +1,7 @@
 import 'package:uuid/uuid.dart';
 
 class SalaDTO {
-  String? id;
+  int? id;
   String nome;
   int capacidadeTotalBikes;
   int numeroFilas;
@@ -9,11 +9,11 @@ class SalaDTO {
   bool ativo;
 
   SalaDTO({
-    String? id,
+    int? id,
     required this.nome,
     required this.capacidadeTotalBikes,
     required this.numeroFilas,
     required this.numeroBikesPorFila,
     required this.ativo,
-  }) : id = id ?? const Uuid().v4();
+  });
 }

@@ -22,7 +22,7 @@ class DAOFabricante {
   // Converte um Map (do banco de dados) para um DTOFabricante
   FabricanteDTO _fromMap(Map<String, dynamic> map) {
     return FabricanteDTO(
-      id: map['id'] as String?,
+      id: map['id'] as int?,
       nome: map['nome'] as String,
       descricao: map['descricao'] as String,
       nomeContatoPrincipal: map['nome_contato_principal'] as String,

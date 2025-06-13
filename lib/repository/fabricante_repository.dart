@@ -22,7 +22,7 @@ class FabricanteRepository {
   }
 
   /// Busca um Fabricante pelo ID
-  FabricanteDTO? buscarPorId(String id) {
+  FabricanteDTO? buscarPorId(int id) {
     try {
       return _fabricantes.firstWhere((fab) => fab.id == id);
     } catch (e) {
@@ -40,7 +40,7 @@ class FabricanteRepository {
   }
 
   /// Remove um Fabricante pelo ID
-  void remover(String id) {
+  void remover(int id) {
     return _fabricantes.removeWhere((fab) => fab.id == id);
   }
 }

@@ -15,7 +15,7 @@ class _BikeFormState extends State<BikeForm> {
 
   final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _numeroSerieController = TextEditingController();
-  String? _fabricanteSelecionado; // ID do Fabricante
+  int? _fabricanteSelecionado; // ID do Fabricante
 
   DateTime? _dataAquisicao;
   DateTime? _dataCadastroSistema;
@@ -76,7 +76,7 @@ class _BikeFormState extends State<BikeForm> {
                 validator: (value) =>
                     value!.isEmpty ? 'Informe o número de série' : null,
               ),
-              DropdownButtonFormField<String>(
+              DropdownButtonFormField<int>(
                 value: _fabricanteSelecionado,
                 decoration: const InputDecoration(labelText: 'Fabricante'),
                 items: _fabricantes.map((fab) {
