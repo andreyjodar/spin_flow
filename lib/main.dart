@@ -7,6 +7,7 @@ import 'package:flutter_application_1/telas/form_tipo-manutencao.dart';
 import 'package:flutter_application_1/telas/form_video_aula.dart';
 import 'package:flutter_application_1/telas/lista_fabricante.dart';
 import 'package:flutter_application_1/telas/tela_dashboard.dart';
+import 'package:flutter_application_1/telas/lista_sala.dart';
 
 void main() {
   runApp(const MyApp());
@@ -47,7 +48,8 @@ class MyApp extends StatelessWidget {
         '/cadastro_sala': (context) => SalaForm(),
         '/cadastro_tipo_manutencao': (context) => TipoManutencaoForm(),
         '/cadastro_bike': (context) => BikeForm(),
-        '/lista_fabricante': (context) => ListaFabricante()
+        '/lista_fabricante': (context) => ListaFabricante(),
+        '/lista_sala': (context) => ListaSala()
       },
     );
   }

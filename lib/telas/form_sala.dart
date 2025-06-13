@@ -80,7 +80,7 @@ class _SalaFormState extends State<SalaForm> {
                           int.parse(_numeroBikesPorFilaController.text),
                       ativo: _ativo,
                     );
-
+                    Navigator.pushNamed(context, '/lista_sala');
                     // Aqui você pode usar o objeto sala para salvar ou enviar.
                     print('Sala cadastrada: ${sala.nome}');
                     ScaffoldMessenger.of(context).showSnackBar(
