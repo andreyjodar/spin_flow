@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/dto/dto_fabricante..dart';
+import 'package:flutter_application_1/dto/dto_fabricante.dart';
 import 'package:uuid/uuid.dart';
 
 // Mock de lista de dados de Fabricante

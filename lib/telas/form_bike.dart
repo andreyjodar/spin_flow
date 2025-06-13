@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/dto/dto_bike.dart';
-import 'package:flutter_application_1/dto/dto_fabricante..dart';
+import 'package:flutter_application_1/dto/dto_fabricante.dart';
 import 'package:flutter_application_1/repository/fabricante_repository.dart';
 
 class BikeForm extends StatefulWidget {
@@ -15,7 +15,7 @@ class _BikeFormState extends State<BikeForm> {
 
   final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _numeroSerieController = TextEditingController();
-  int? _fabricanteSelecionado; // ID do Fabricante
+  String? _fabricanteSelecionado; // ID do Fabricante
 
   DateTime? _dataAquisicao;
   DateTime? _dataCadastroSistema;
@@ -76,7 +76,7 @@ class _BikeFormState extends State<BikeForm> {
                 validator: (value) =>
                     value!.isEmpty ? 'Informe o número de série' : null,
               ),
-              DropdownButtonFormField<int>(
+              DropdownButtonFormField<String>(
                 value: _fabricanteSelecionado,
                 decoration: const InputDecoration(labelText: 'Fabricante'),
                 items: _fabricantes.map((fab) {
