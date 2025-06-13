@@ -5,6 +5,7 @@ import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 late List<String> criarTabelas;
 late List<String> inserirFabricantes;
+late List<String> inserirAlunos;
 
 class Conexao {
   static Database? _database;
@@ -15,7 +16,7 @@ class Conexao {
     try {
       if (kIsWeb) {
         databaseFactory = databaseFactoryFfiWeb;
-        _database = await databaseFactory.openDatabase('spin_flow.db');
+        _database = await databaseFactory.openDatabase('spin_flow_web.db');
       } else {
         String path = join(await getDatabasesPath(), 'spin_flow.db');
         await deleteDatabase(
@@ -29,6 +30,9 @@ class Conexao {
               await db.execute(comando);
             }
             for (var comando in inserirFabricantes) {
+              await db.execute(comando);
+            }
+            for (var comando in inserirAlunos) {
               await db.execute(comando);
             }
           },

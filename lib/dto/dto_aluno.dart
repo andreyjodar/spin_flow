@@ -1,27 +1,25 @@
-import 'package:uuid/uuid.dart';
-
 class AlunoDTO {
-  String? id;
+  int? id;
   String nome;
   String email;
   DateTime dataNascimento;
   String genero;
   String telefoneContato;
-  String perfilInstagram;
-  String perfilFacebook;
-  String perfilTiktok;
+  String? perfilInstagram;
+  String? perfilFacebook;
+  String? perfilTiktok;
   bool ativo;
 
   AlunoDTO({
-    String? id,
+    int? id,
     required this.nome,
     required this.email,
     required this.dataNascimento,
     required this.genero,
     required this.telefoneContato,
-    required this.perfilInstagram,
-    required this.perfilFacebook,
-    required this.perfilTiktok,
+    this.perfilInstagram,
+    this.perfilFacebook,
+    this.perfilTiktok,
     required this.ativo,
-  }) : id = id ?? const Uuid().v4();
+  });
 }
