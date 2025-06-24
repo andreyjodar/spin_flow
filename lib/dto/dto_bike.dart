@@ -1,19 +1,19 @@
 class BikeDTO {
-  int? id;
-  String nome;
-  String numeroSerie;
-  int? fabricanteId; // ID do Fabricante (Associação 1:1)
-  DateTime dataAquisicao;
-  DateTime dataCadastroSistema;
-  bool ativo;
+  final int? id;
+  final String nome;
+  final String? numeroSerie;
+  final int fabricanteId;
+  final DateTime dataAquisicao;
+  final DateTime dataCadastro;
+  final bool ativo;
 
   BikeDTO({
-    int? id,
+    this.id,
     required this.nome,
-    required this.numeroSerie,
+    this.numeroSerie,
     required this.fabricanteId,
     required this.dataAquisicao,
-    required this.dataCadastroSistema,
-    required this.ativo,
-  });
+    DateTime? dataCadastro,
+    this.ativo = true,
+  }) : dataCadastro = dataCadastro ?? DateTime.now();
 }

@@ -1,14 +1,13 @@
-
 class VideoAulaDTO {
-  int? id;
-  String nome;
-  String linkVideo;
-  bool ativo;
+  final int? id;
+  final String nome;
+  final String link;
+  final bool ativo;
 
   VideoAulaDTO({
-    int? id,
+    this.id,
     required this.nome,
-    required this.linkVideo,
+    required this.link,
     required this.ativo,
   });
 }

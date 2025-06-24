@@ -1,14 +1,13 @@
-
 class TipoManutencaoDTO {
-  int? id;
-  String nome;
-  String descricao;
-  bool ativo;
+  final int? id;
+  final String nome;
+  final String? descricao;
+  final bool ativo;
 
   TipoManutencaoDTO({
-    int? id,
+    this.id,
     required this.nome,
-    required this.descricao,
-    required this.ativo,
+    this.descricao,
+    this.ativo = true,
   });
 }

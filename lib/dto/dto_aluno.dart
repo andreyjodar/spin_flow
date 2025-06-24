@@ -1,26 +1,32 @@
-
 class AlunoDTO {
-  int? id;
-  String nome;
-  String email;
-  DateTime dataNascimento;
-  String genero;
-  String telefoneContato;
-  String perfilInstagram;
-  String perfilFacebook;
-  String perfilTiktok;
-  bool ativo;
+  final int? id;
+  final String nome;
+  final String email;
+  final DateTime dataNascimento;
+  final Genero genero;
+  final String telefone;
+  final String? instagram;
+  final String? facebook;
+  final String? tiktok;
+  final bool ativo;
 
   AlunoDTO({
-    int? id,
+    this.id,
     required this.nome,
     required this.email,
     required this.dataNascimento,
     required this.genero,
-    required this.telefoneContato,
-    required this.perfilInstagram,
-    required this.perfilFacebook,
-    required this.perfilTiktok,
-    required this.ativo,
+    required this.telefone,
+    this.instagram,
+    this.facebook,
+    this.tiktok,
+    this.ativo = true,
   });
+}
+
+enum Genero {
+  masculino,
+  feminino,
+  outro,
+  prefiroNaoInformar,
 }

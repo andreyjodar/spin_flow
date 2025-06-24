@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/banco/dao/dao_fabricante.dart';
-import 'package:flutter_application_1/dto/dto_fabricante.dart';
+import 'package:spin_flow/banco/dao/dao_fabricante.dart';
+import 'package:spin_flow/dto/dto_fabricante.dart';
 
 class ListaFabricante extends StatefulWidget {
   const ListaFabricante({super.key});

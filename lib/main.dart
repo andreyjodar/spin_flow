@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/telas/form_aluno.dart';
-import 'package:flutter_application_1/telas/form_bike.dart';
-import 'package:flutter_application_1/telas/form_fabricante.dart';
-import 'package:flutter_application_1/telas/form_sala.dart';
-import 'package:flutter_application_1/telas/form_tipo-manutencao.dart';
-import 'package:flutter_application_1/telas/form_video_aula.dart';
-import 'package:flutter_application_1/telas/lista_fabricante.dart';
-import 'package:flutter_application_1/telas/tela_dashboard.dart';
+import 'package:spin_flow/telas/formularios/form_aluno.dart';
+import 'package:spin_flow/telas/formularios/form_bike.dart';
+import 'package:spin_flow/telas/formularios/form_fabricante.dart';
+import 'package:spin_flow/telas/formularios/form_sala.dart';
+import 'package:spin_flow/telas/formularios/form_tipo-manutencao.dart';
+import 'package:spin_flow/telas/formularios/form_video_aula.dart';
+import 'package:spin_flow/telas/listas/lista_fabricante.dart';
+import 'package:spin_flow/telas/tela_dashboard.dart';
 
 void main() {
   runApp(const MyApp());

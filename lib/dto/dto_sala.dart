@@ -1,18 +1,17 @@
-
 class SalaDTO {
-  int? id;
-  String nome;
-  int capacidadeTotalBikes;
-  int numeroFilas;
-  int numeroBikesPorFila;
-  bool ativo;
+  final int? id;
+  final String nome;
+  final int capacidadeTotalBikes;
+  final int numeroFilas;
+  final int bikesPorFila;
+  final bool ativo;
 
   SalaDTO({
-    int? id,
+    this.id,
     required this.nome,
     required this.capacidadeTotalBikes,
     required this.numeroFilas,
-    required this.numeroBikesPorFila,
-    required this.ativo,
+    required this.bikesPorFila,
+    this.ativo = true,
   });
 }
