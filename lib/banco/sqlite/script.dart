@@ -1,4 +1,4 @@
-final _fabricante = '''
+const _fabricante = '''
 CREATE TABLE Fabricante (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nome TEXT NOT NULL,

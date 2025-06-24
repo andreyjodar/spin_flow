@@ -1,5 +1,6 @@
 import 'package:flutter_application_1/banco/sqlite/conexao.dart';
-import 'package:flutter_application_1/dto/dto_fabricante..dart'; // Assumindo que Conexao está neste caminho
+import 'package:flutter_application_1/dto/dto_fabricante.dart';
+// Assumindo que Conexao está neste caminho
 
 class DAOFabricante {
   final String _tableName = 'Fabricante';
@@ -22,10 +23,10 @@ class DAOFabricante {
     return FabricanteDTO(
       id: map['id'] as int?,
       nome: map['nome'] as String,
-      descricao: map['descricao'] as String?,
-      nomeContatoPrincipal: map['nome_contato_principal'] as String?,
-      emailContato: map['email_contato'] as String?,
-      telefoneContato: map['telefone_contato'] as String?,
+      descricao: map['descricao'] as String,
+      nomeContatoPrincipal: map['nome_contato_principal'] as String,
+      emailContato: map['email_contato'] as String,
+      telefoneContato: map['telefone_contato'] as String,
       ativo: map['ativo'] == 1, // Converte INTEGER (1/0) para bool
     );
   }

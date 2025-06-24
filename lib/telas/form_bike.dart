@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/dto/dto_bike.dart';
-import 'package:flutter_application_1/dto/dto_fabricante..dart';
+import 'package:flutter_application_1/dto/dto_fabricante.dart';
 import 'package:flutter_application_1/repository/fabricante_repository.dart';
 
 class BikeForm extends StatefulWidget {

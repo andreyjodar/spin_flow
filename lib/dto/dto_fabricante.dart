@@ -1,7 +1,6 @@
-import 'package:uuid/uuid.dart';
 
 class FabricanteDTO {
-  String? id;
+  int? id;
   String nome;
   String descricao;
   String nomeContatoPrincipal;
@@ -10,12 +9,12 @@ class FabricanteDTO {
   bool ativo;
 
   FabricanteDTO({
-    String? id,
+    int? id,
     required this.nome,
     required this.descricao,
     required this.nomeContatoPrincipal,
     required this.emailContato,
     required this.telefoneContato,
     required this.ativo,
-  }) : id = id ?? const Uuid().v4();
+  });
 }
