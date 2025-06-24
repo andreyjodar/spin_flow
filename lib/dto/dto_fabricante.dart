@@ -1,20 +1,19 @@
-
 class FabricanteDTO {
-  int? id;
-  String nome;
-  String descricao;
-  String nomeContatoPrincipal;
-  String emailContato;
-  String telefoneContato;
-  bool ativo;
+  final int? id;
+  final String nome;
+  final String? descricao;
+  final String? nomeContatoPrincipal;
+  final String? emailContato;
+  final String? telefoneContato;
+  final bool ativo;
 
   FabricanteDTO({
-    int? id,
+    this.id,
     required this.nome,
-    required this.descricao,
-    required this.nomeContatoPrincipal,
-    required this.emailContato,
-    required this.telefoneContato,
-    required this.ativo,
+    this.descricao,
+    this.nomeContatoPrincipal,
+    this.emailContato,
+    this.telefoneContato,
+    this.ativo = true,
   });
 }
