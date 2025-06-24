@@ -69,7 +69,7 @@ class DAOTipoManutencao {
   /// Busca um tipo de manutenção específico pelo seu [id].
   ///
   /// Retorna o [TipoManutencaoDTO] se encontrado, caso contrário, retorna `null`.
-  Future<TipoManutencaoDTO?> consultarPorId(String id) async {
+  Future<TipoManutencaoDTO?> consultarPorId(int id) async {
     final db = await Conexao.get();
     final List<Map<String, dynamic>> result =
         await db.rawQuery(_sqlSelectById, [id]);
