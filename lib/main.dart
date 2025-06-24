@@ -26,12 +26,12 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const TelaDashboard(),
         '/cadastro_video_aula': (context) => const FormVideoAula(),
-        '/cadastro_aluno': (context) => AlunoForm(),
-        '/cadastro_fabricante': (context) => FabricanteForm(),
-        '/cadastro_sala': (context) => SalaForm(),
-        '/cadastro_tipo_manutencao': (context) => TipoManutencaoForm(),
-        '/cadastro_bike': (context) => BikeForm(),
-        '/lista_fabricante': (context) => ListaFabricante()
+        '/cadastro_aluno': (context) => const AlunoForm(),
+        '/cadastro_fabricante': (context) => const FabricanteForm(),
+        '/cadastro_sala': (context) => const SalaForm(),
+        '/cadastro_tipo_manutencao': (context) => const TipoManutencaoForm(),
+        '/cadastro_bike': (context) => const BikeForm(),
+        '/lista_fabricante': (context) => const ListaFabricante()
       },
     );
   }

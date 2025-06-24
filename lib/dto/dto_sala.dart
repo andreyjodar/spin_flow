@@ -1,4 +1,3 @@
-import 'package:uuid/uuid.dart';
 
 class SalaDTO {
   int? id;

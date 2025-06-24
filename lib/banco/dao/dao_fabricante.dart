@@ -1,7 +1,6 @@
 import 'package:flutter_application_1/banco/sqlite/conexao.dart';
 import 'package:flutter_application_1/dto/dto_fabricante.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:flutter_application_1/banco/sqlite/conexao.dart'; // Assumindo que Conexao está neste caminho
+// Assumindo que Conexao está neste caminho
 
 class DAOFabricante {
   final String _tableName = 'Fabricante';
