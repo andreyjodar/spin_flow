@@ -72,7 +72,7 @@ class _FormFabricanteState extends State<FormFabricante> {
             TextButton(
               child: const Text('OK'),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed('/lista_fabricante');
               },
             ),
           ],
