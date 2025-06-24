@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spin_flow/dto/dto_fabricante.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class FormFabricante extends StatefulWidget {
   const FormFabricante({super.key});
@@ -15,6 +16,10 @@ class _FormFabricanteState extends State<FormFabricante> {
   final _nomeContatoController = TextEditingController();
   final _emailController = TextEditingController();
   final _telefoneController = TextEditingController();
+  final _phoneFormatter = MaskTextInputFormatter(
+    mask: '(##) #####-####', 
+    filter: {"#": RegExp(r'[0-9]')}
+  );
   bool _ativo = true;
 
   @override
@@ -129,19 +134,37 @@ class _FormFabricanteState extends State<FormFabricante> {
                 TextFormField(
                   controller: _emailController,
                   decoration: const InputDecoration(
-                    labelText: 'Email do Contato',
+                    labelText: 'Email *',
                     border: OutlineInputBorder(),
                   ),
                   keyboardType: TextInputType.emailAddress,
+                  validator: (value) {
+                    if (value != null && value.trim().isNotEmpty) {
+                      final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                      if (!emailRegex.hasMatch(value)) {
+                        return 'Por favor, insira um email válido.';
+                      }
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 16),
                 TextFormField(
                   controller: _telefoneController,
+                  inputFormatters: [_phoneFormatter],
                   decoration: const InputDecoration(
-                    labelText: 'Telefone do Contato',
+                    labelText: 'Telefone *',
                     border: OutlineInputBorder(),
                   ),
                   keyboardType: TextInputType.phone,
+                  validator: (value) {
+                    if (value != null && value.trim().isNotEmpty) {
+                      if (value.replaceAll(RegExp(r'[^0-9]'), '').length < 10) {
+                        return 'O telefone deve ter pelo menos 10 dígitos.';
+                      }
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 16),
                 SwitchListTile(

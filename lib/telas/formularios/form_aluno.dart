@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; 
+import 'package:intl/intl.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart'; 
 import 'package:spin_flow/dto/dto_aluno.dart'; 
 
 class FormAluno extends StatefulWidget {
@@ -18,6 +19,10 @@ class _FormAlunoState extends State<FormAluno> {
   final _instagramController = TextEditingController();
   final _facebookController = TextEditingController();
   final _tiktokController = TextEditingController();
+  final _phoneFormatter = MaskTextInputFormatter(
+    mask: '(##) #####-####', 
+    filter: {"#": RegExp(r'[0-9]')}
+  );
   
   DateTime? _dataNascimento;
   Genero? _generoSelecionado;
@@ -128,9 +133,13 @@ class _FormAlunoState extends State<FormAluno> {
                   controller: _emailController,
                   decoration: const InputDecoration(labelText: 'Email *'),
                   keyboardType: TextInputType.emailAddress,
-                  validator: (v) {
-                    if (v == null || v.trim().isEmpty) return 'Email é obrigatório';
-                    if (!v.contains('@') || !v.contains('.')) return 'Email inválido';
+                  validator: (value) {
+                    if (value != null && value.trim().isNotEmpty) {
+                      final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                      if (!emailRegex.hasMatch(value)) {
+                        return 'Por favor, insira um email válido.';
+                      }
+                    }
                     return null;
                   },
                 ),
@@ -158,9 +167,17 @@ class _FormAlunoState extends State<FormAluno> {
                 ),
                 TextFormField(
                   controller: _telefoneController,
+                  inputFormatters: [_phoneFormatter],
                   decoration: const InputDecoration(labelText: 'Telefone *'),
                   keyboardType: TextInputType.phone,
-                  validator: (v) => (v == null || v.trim().isEmpty) ? 'Telefone é obrigatório' : null,
+                  validator: (value) {
+                    if (value != null && value.trim().isNotEmpty) {
+                      if (value.replaceAll(RegExp(r'[^0-9]'), '').length < 10) {
+                        return 'O telefone deve ter pelo menos 10 dígitos.';
+                      }
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 24),
                 // Campos Opcionais
