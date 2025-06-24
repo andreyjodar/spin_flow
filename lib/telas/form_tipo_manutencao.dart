@@ -56,7 +56,6 @@ class _TipoManutencaoFormState extends State<TipoManutencaoForm> {
                       ativo: _ativo,
                     );
 
-                    // Aqui você pode usar o objeto tipoManutencao para salvar ou enviar.
                     print(
                         'Tipo de Manutenção cadastrado: ${tipoManutencao.nome}');
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -64,6 +63,8 @@ class _TipoManutencaoFormState extends State<TipoManutencaoForm> {
                           content: Text(
                               'Tipo de Manutenção cadastrado com sucesso!')),
                     );
+
+                    Navigator.pushNamed(context, '/lista_tipo_manutencao');
                   }
                 },
                 child: const Text('Salvar'),

@@ -81,7 +81,7 @@ class DAOTipoManutencao {
   }
 
   /// Exclui um tipo de manutenção do banco de dados usando o [id].
-  Future<void> excluir(String id) async {
+  Future<void> excluir(int id) async {
     final db = await Conexao.get();
     await db.rawDelete(_sqlDelete, [id]);
   }

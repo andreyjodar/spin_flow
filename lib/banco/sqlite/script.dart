@@ -1,5 +1,5 @@
-const _fabricante = '''
-CREATE TABLE Fabricante (
+const tabelas = '''
+CREATE TABLE abricante (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nome TEXT NOT NULL,
   descricao TEXT,
@@ -7,10 +7,17 @@ CREATE TABLE Fabricante (
   emailContato TEXT,
   telefoneContato TEXT,
   ativo INTEGER NOT NULL DEFAULT 1
-)
+);
+
+CREATE TABLE tipo_manutencao (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    descricao TEXT
+    ativo INTEGER NOT NULL DEFAULT 1
+);
 ''';
 
-final criarTabelas = [_fabricante];
+final criarTabelas = [tabelas];
 
 final insertFabricantes = [
   '''
@@ -73,4 +80,14 @@ VALUES (
 )
 
 '''
+];
+
+final insertTiposManutencao = [
+  '''
+  INSERT INTO tipo_manutencao (nome, descricao) VALUES ('Limpeza e Verificação Geral', 'Limpeza da estrutura, verificação de ruídos e estabilidade da bicicleta.');
+  INSERT INTO tipo_manutencao (nome, descricao) VALUES ('Ajuste de Freio e Resistência', 'Verificação e ajuste da sapata de freio ou sistema de resistência magnética.');
+  INSERT INTO tipo_manutencao (nome, descricao) VALUES ('Lubrificação da Transmissão', 'Aplicação de lubrificante específico na corrente ou correia de transmissão.');
+  INSERT INTO tipo_manutencao (nome, descricao) VALUES ('Reaperto de Componentes', 'Checagem e reaperto dos parafusos do selim, guidão, pedais e pé de vela.');
+  INSERT INTO tipo_manutencao (nome, descricao) VALUES ('Checagem do Painel Eletrônico', 'Verificação das baterias, funcionamento do display e sensores de cadência/velocidade.');
+  '''
 ];
