@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import 'package:sqflite/sqflite.dart';
-import 'package:flutter_application_1/banco/sqlite/script.dart';
-=======
 import 'package:flutter/foundation.dart';
->>>>>>> main
 import 'package:path/path.dart';
 import 'package:spin_flow/banco/sqlite/script.dart';
 import 'package:sqflite/sqflite.dart';
@@ -45,19 +40,6 @@ class Conexao {
           path,
           version: 1,
           onCreate: (db, version) async {
-<<<<<<< HEAD
-            for (var comando in criarTabelas) {
-              await db.execute(comando);
-            }
-            for (var comando in insertFabricantes) {
-              await db.execute(comando);
-            }            
-            for (var comando in insertTiposManutencao) {
-              await db.execute(comando);
-            }
-          },
-          onUpgrade: (db, oldVersion, newVersion) async {
-=======
             await db.transaction((txn) async {
               for (final tabela in criarTabelas) {
                 await txn.execute(tabela);
@@ -66,17 +48,12 @@ class Conexao {
                 await txn.execute(insert);
               }
             });
->>>>>>> main
           },
         );
       }
       return _database!;
     } catch (e) {
-<<<<<<< HEAD
-      print(e);
-=======
       print('Erro ao abrir o banco de dados: $e');
->>>>>>> main
       rethrow;
     }
   }

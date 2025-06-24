@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-const tabelas = '''
-CREATE TABLE abricante (
-=======
 const _tabelas = '''
 CREATE TABLE fabricante (
->>>>>>> main
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   nome TEXT NOT NULL,
   descricao TEXT,
@@ -13,22 +8,9 @@ CREATE TABLE fabricante (
   telefone_contato TEXT,
   ativo INTEGER NOT NULL DEFAULT 1
 );
-<<<<<<< HEAD
-
-CREATE TABLE tipo_manutencao (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome TEXT NOT NULL,
-    descricao TEXT
-    ativo INTEGER NOT NULL DEFAULT 1
-);
-''';
-
-final criarTabelas = [tabelas];
-=======
 ''';
 
 final criarTabelas = [_tabelas];
->>>>>>> main
 
 final insertFabricantes = [
 '''
@@ -55,14 +37,4 @@ VALUES ('Clean & Cia', 'Empresa especializada em produtos de limpeza e manutenç
 INSERT INTO fabricante (nome, descricao, nome_contato_principal, email_contato, telefone_contato, ativo) 
 VALUES ('Ciclo Total SA', 'Antiga fornecedora de bikes, agora com operações encerradas.', 'Marcos Pereira', 'arquivo@ciclototal.com', '(51) 91111-2222', 0);
 '''
-];
-
-final insertTiposManutencao = [
-  '''
-  INSERT INTO tipo_manutencao (nome, descricao) VALUES ('Limpeza e Verificação Geral', 'Limpeza da estrutura, verificação de ruídos e estabilidade da bicicleta.');
-  INSERT INTO tipo_manutencao (nome, descricao) VALUES ('Ajuste de Freio e Resistência', 'Verificação e ajuste da sapata de freio ou sistema de resistência magnética.');
-  INSERT INTO tipo_manutencao (nome, descricao) VALUES ('Lubrificação da Transmissão', 'Aplicação de lubrificante específico na corrente ou correia de transmissão.');
-  INSERT INTO tipo_manutencao (nome, descricao) VALUES ('Reaperto de Componentes', 'Checagem e reaperto dos parafusos do selim, guidão, pedais e pé de vela.');
-  INSERT INTO tipo_manutencao (nome, descricao) VALUES ('Checagem do Painel Eletrônico', 'Verificação das baterias, funcionamento do display e sensores de cadência/velocidade.');
-  '''
 ];
