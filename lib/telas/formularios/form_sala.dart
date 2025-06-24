@@ -1,97 +1,166 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:spin_flow/dto/dto_sala.dart';
 
-class SalaForm extends StatefulWidget {
-  const SalaForm({Key? key}) : super(key: key);
+class FormSala extends StatefulWidget {
+  const FormSala({super.key});
 
   @override
-  _SalaFormState createState() => _SalaFormState();
+  State<FormSala> createState() => _FormSalaState();
 }
 
-class _SalaFormState extends State<SalaForm> {
+class _FormSalaState extends State<FormSala> {
   final _formKey = GlobalKey<FormState>();
-
-  final TextEditingController _nomeController = TextEditingController();
-  final TextEditingController _capacidadeController = TextEditingController();
-  final TextEditingController _numeroFilasController = TextEditingController();
-  final TextEditingController _numeroBikesPorFilaController =
-      TextEditingController();
-
+  final _nomeController = TextEditingController();
+  final _capacidadeController = TextEditingController();
+  final _filasController = TextEditingController();
+  final _bikesPorFilaController = TextEditingController();
   bool _ativo = true;
+
+  @override
+  void dispose() {
+    _nomeController.dispose();
+    _capacidadeController.dispose();
+    _filasController.dispose();
+    _bikesPorFilaController.dispose();
+    super.dispose();
+  }
+
+  void _salvar() {
+    if (_formKey.currentState?.validate() ?? false) {
+      final sala = SalaDTO(
+        nome: _nomeController.text,
+        capacidadeTotalBikes: int.parse(_capacidadeController.text),
+        numeroFilas: int.parse(_filasController.text),
+        bikesPorFila: int.parse(_bikesPorFilaController.text),
+        ativo: _ativo,
+      );
+
+      _mostrarDialogoDeSucesso(sala);
+    }
+  }
+
+  void _mostrarDialogoDeSucesso(SalaDTO sala) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Sala Salva com Sucesso'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Nome: ${sala.nome}'),
+                Text('Capacidade Total: ${sala.capacidadeTotalBikes} bikes'),
+                Text('Número de Filas: ${sala.numeroFilas}'),
+                Text('Bikes por Fila: ${sala.bikesPorFila}'),
+                Text('Ativo: ${sala.ativo ? 'Sim' : 'Não'}'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  String? _validarNumero(String? value, String nomeCampo) {
+    if (value == null || value.trim().isEmpty) {
+      return '$nomeCampo é obrigatório.';
+    }
+    if (int.tryParse(value) == null) {
+      return 'Por favor, insira um número válido.';
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Cadastro de Sala')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: [
-              TextFormField(
-                controller: _nomeController,
-                decoration: const InputDecoration(labelText: 'Nome'),
-                validator: (value) => value!.isEmpty ? 'Informe o nome' : null,
-              ),
-              TextFormField(
-                controller: _capacidadeController,
-                decoration: const InputDecoration(
-                    labelText: 'Capacidade Total de Bikes'),
-                keyboardType: TextInputType.number,
-                validator: (value) =>
-                    value!.isEmpty ? 'Informe a capacidade' : null,
-              ),
-              TextFormField(
-                controller: _numeroFilasController,
-                decoration: const InputDecoration(labelText: 'Número de Filas'),
-                keyboardType: TextInputType.number,
-                validator: (value) =>
-                    value!.isEmpty ? 'Informe o número de filas' : null,
-              ),
-              TextFormField(
-                controller: _numeroBikesPorFilaController,
-                decoration: const InputDecoration(
-                    labelText: 'Número de Bikes por Fila'),
-                keyboardType: TextInputType.number,
-                validator: (value) => value!.isEmpty
-                    ? 'Informe o número de bikes por fila'
-                    : null,
-              ),
-              SwitchListTile(
-                title: const Text('Ativo'),
-                value: _ativo,
-                onChanged: (val) {
-                  setState(() {
-                    _ativo = val;
-                  });
-                },
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    SalaDTO sala = SalaDTO(
-                      nome: _nomeController.text,
-                      capacidadeTotalBikes:
-                          int.parse(_capacidadeController.text),
-                      numeroFilas: int.parse(_numeroFilasController.text),
-                      numeroBikesPorFila:
-                          int.parse(_numeroBikesPorFilaController.text),
-                      ativo: _ativo,
-                    );
-
-                    // Aqui você pode usar o objeto sala para salvar ou enviar.
-                    print('Sala cadastrada: ${sala.nome}');
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text('Sala cadastrada com sucesso!')),
-                    );
-                  }
-                },
-                child: const Text('Salvar'),
-              ),
-            ],
+      appBar: AppBar(
+        title: const Text('Formulário de Sala'),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                TextFormField(
+                  controller: _nomeController,
+                  decoration: const InputDecoration(
+                    labelText: 'Nome *',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'O nome é obrigatório.';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _capacidadeController,
+                  decoration: const InputDecoration(
+                    labelText: 'Capacidade Total de Bikes *',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  validator: (value) => _validarNumero(value, 'Capacidade Total'),
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _filasController,
+                  decoration: const InputDecoration(
+                    labelText: 'Número de Filas *',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  validator: (value) => _validarNumero(value, 'Número de Filas'),
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _bikesPorFilaController,
+                  decoration: const InputDecoration(
+                    labelText: 'Bikes por Fila *',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  validator: (value) => _validarNumero(value, 'Bikes por Fila'),
+                ),
+                const SizedBox(height: 16),
+                SwitchListTile(
+                  title: const Text('Ativo'),
+                  value: _ativo,
+                  onChanged: (bool value) {
+                    setState(() {
+                      _ativo = value;
+                    });
+                  },
+                  secondary: const Icon(Icons.check_circle_outline),
+                ),
+                const SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: _salvar,
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  child: const Text('Salvar'),
+                ),
+              ],
+            ),
           ),
         ),
       ),

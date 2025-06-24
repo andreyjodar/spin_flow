@@ -1,101 +1,169 @@
 import 'package:flutter/material.dart';
 import 'package:spin_flow/dto/dto_fabricante.dart';
 
-class FabricanteForm extends StatefulWidget {
-  const FabricanteForm({Key? key}) : super(key: key);
+class FormFabricante extends StatefulWidget {
+  const FormFabricante({super.key});
 
   @override
-  _FabricanteFormState createState() => _FabricanteFormState();
+  State<FormFabricante> createState() => _FormFabricanteState();
 }
 
-class _FabricanteFormState extends State<FabricanteForm> {
+class _FormFabricanteState extends State<FormFabricante> {
   final _formKey = GlobalKey<FormState>();
-
-  final TextEditingController _nomeController = TextEditingController();
-  final TextEditingController _descricaoController = TextEditingController();
-  final TextEditingController _nomeContatoController = TextEditingController();
-  final TextEditingController _emailContatoController = TextEditingController();
-  final TextEditingController _telefoneContatoController =
-      TextEditingController();
-
+  final _nomeController = TextEditingController();
+  final _descricaoController = TextEditingController();
+  final _nomeContatoController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _telefoneController = TextEditingController();
   bool _ativo = true;
+
+  @override
+  void dispose() {
+    _nomeController.dispose();
+    _descricaoController.dispose();
+    _nomeContatoController.dispose();
+    _emailController.dispose();
+    _telefoneController.dispose();
+    super.dispose();
+  }
+
+  void _salvar() {
+    if (_formKey.currentState?.validate() ?? false) {
+      final fabricante = FabricanteDTO(
+        nome: _nomeController.text,
+        descricao: _descricaoController.text.isNotEmpty 
+            ? _descricaoController.text 
+            : null,
+        nomeContatoPrincipal: _nomeContatoController.text.isNotEmpty
+            ? _nomeContatoController.text
+            : null,
+        emailContato: _emailController.text.isNotEmpty 
+            ? _emailController.text 
+            : null,
+        telefoneContato: _telefoneController.text.isNotEmpty
+            ? _telefoneController.text
+            : null,
+        ativo: _ativo,
+      );
+
+      _mostrarDialogoDeSucesso(fabricante);
+    }
+  }
+
+  void _mostrarDialogoDeSucesso(FabricanteDTO fabricante) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Fabricante Salvo com Sucesso'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Nome: ${fabricante.nome}'),
+                Text('Descrição: ${fabricante.descricao ?? 'Não informado'}'),
+                Text('Contato Principal: ${fabricante.nomeContatoPrincipal ?? 'Não informado'}'),
+                Text('Email: ${fabricante.emailContato ?? 'Não informado'}'),
+                Text('Telefone: ${fabricante.telefoneContato ?? 'Não informado'}'),
+                Text('Ativo: ${fabricante.ativo ? 'Sim' : 'Não'}'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Cadastro de Fabricante')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: [
-              TextFormField(
-                controller: _nomeController,
-                decoration: const InputDecoration(labelText: 'Nome'),
-                validator: (value) => value!.isEmpty ? 'Informe o nome' : null,
-              ),
-              TextFormField(
-                controller: _descricaoController,
-                decoration: const InputDecoration(labelText: 'Descrição'),
-                validator: (value) =>
-                    value!.isEmpty ? 'Informe a descrição' : null,
-              ),
-              TextFormField(
-                controller: _nomeContatoController,
-                decoration: const InputDecoration(
-                    labelText: 'Nome do Contato Principal'),
-                validator: (value) =>
-                    value!.isEmpty ? 'Informe o nome do contato' : null,
-              ),
-              TextFormField(
-                controller: _emailContatoController,
-                decoration:
-                    const InputDecoration(labelText: 'Email do Contato'),
-                validator: (value) =>
-                    value!.isEmpty ? 'Informe o email do contato' : null,
-              ),
-              TextFormField(
-                controller: _telefoneContatoController,
-                decoration:
-                    const InputDecoration(labelText: 'Telefone do Contato'),
-                validator: (value) =>
-                    value!.isEmpty ? 'Informe o telefone do contato' : null,
-              ),
-              SwitchListTile(
-                title: const Text('Ativo'),
-                value: _ativo,
-                onChanged: (val) {
-                  setState(() {
-                    _ativo = val;
-                  });
-                },
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    FabricanteDTO fabricante = FabricanteDTO(
-                      nome: _nomeController.text,
-                      descricao: _descricaoController.text,
-                      nomeContatoPrincipal: _nomeContatoController.text,
-                      emailContato: _emailContatoController.text,
-                      telefoneContato: _telefoneContatoController.text,
-                      ativo: _ativo,
-                    );
-
-                    // Aqui você pode usar o objeto fabricante para salvar ou enviar.
-                    print('Fabricante cadastrado: ${fabricante.nome}');
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text('Fabricante cadastrado com sucesso!')),
-                    );
-                    Navigator.pushNamed(context, '/lista_fabricante');
-                  }
-                },
-                child: const Text('Salvar'),
-              ),
-            ],
+      appBar: AppBar(
+        title: const Text('Formulário de Fabricante'),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                TextFormField(
+                  controller: _nomeController,
+                  decoration: const InputDecoration(
+                    labelText: 'Nome *',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'O nome é obrigatório.';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _descricaoController,
+                  decoration: const InputDecoration(
+                    labelText: 'Descrição',
+                    border: OutlineInputBorder(),
+                  ),
+                  maxLines: 3,
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _nomeContatoController,
+                  decoration: const InputDecoration(
+                    labelText: 'Nome do Contato Principal',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _emailController,
+                  decoration: const InputDecoration(
+                    labelText: 'Email do Contato',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _telefoneController,
+                  decoration: const InputDecoration(
+                    labelText: 'Telefone do Contato',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.phone,
+                ),
+                const SizedBox(height: 16),
+                SwitchListTile(
+                  title: const Text('Ativo'),
+                  value: _ativo,
+                  onChanged: (bool value) {
+                    setState(() {
+                      _ativo = value;
+                    });
+                  },
+                  secondary: const Icon(Icons.check_circle_outline),
+                ),
+                const SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: _salvar,
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  child: const Text('Salvar'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
