@@ -13,6 +13,19 @@ class ListaTipoManutencao extends StatefulWidget {
 class _ListaTipoManutencaoState extends State<ListaTipoManutencao> {
   final DAOTipoManutencao _dao = DAOTipoManutencao();
 
+  void _navegarParaFormulario([TipoManutencaoDTO? tipoManutencao]) async {
+    final resultado = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => FormTipoManutencao(tipoManutencao: tipoManutencao),
+      ),
+    );
+
+    if (resultado == true) {
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,11 +55,7 @@ class _ListaTipoManutencaoState extends State<ListaTipoManutencao> {
                     children: [
                       IconButton(
                         icon: const Icon(Icons.edit, color: Colors.orange),
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Alterar: ${tipoManutencao.nome}')),
-                          );
-                        },
+                        onPressed: () => _navegarParaFormulario(tipoManutencao),
                       ),
                       IconButton(
                         icon: const Icon(Icons.delete, color: Colors.red),
@@ -63,12 +72,7 @@ class _ListaTipoManutencaoState extends State<ListaTipoManutencao> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => const FormTipoManutencao()),
-          );
-        },
+        onPressed: () => _navegarParaFormulario(),
         child: const Icon(Icons.add),
       ),
     );

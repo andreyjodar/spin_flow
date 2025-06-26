@@ -1,9 +1,13 @@
+// lib/telas/formularios/form_tipo_manutencao.dart
+
 import 'package:flutter/material.dart';
 import 'package:spin_flow/banco/dao/dao_tipo_manutencao.dart';
 import 'package:spin_flow/dto/dto_tipo_manutencao.dart'; 
 
 class FormTipoManutencao extends StatefulWidget {
-  const FormTipoManutencao({super.key});
+  final TipoManutencaoDTO? tipoManutencao;
+
+  const FormTipoManutencao({super.key, this.tipoManutencao});
 
   @override
   State<FormTipoManutencao> createState() => _FormTipoManutencaoState();
@@ -17,6 +21,16 @@ class _FormTipoManutencaoState extends State<FormTipoManutencao> {
   bool _ativo = true;
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.tipoManutencao != null) {
+      _nomeController.text = widget.tipoManutencao!.nome;
+      _descricaoController.text = widget.tipoManutencao!.descricao ?? '';
+      _ativo = widget.tipoManutencao!.ativo;
+    }
+  }
+
+  @override
   void dispose() {
     _nomeController.dispose();
     _descricaoController.dispose();
@@ -26,6 +40,7 @@ class _FormTipoManutencaoState extends State<FormTipoManutencao> {
   void _salvar() async {
     if (_formKey.currentState?.validate() ?? false) {
       final tipoManutencao = TipoManutencaoDTO(
+        id: widget.tipoManutencao?.id,
         nome: _nomeController.text,
         descricao: _descricaoController.text.isNotEmpty 
             ? _descricaoController.text 
@@ -33,48 +48,24 @@ class _FormTipoManutencaoState extends State<FormTipoManutencao> {
         ativo: _ativo,
       );
 
-      final salvoComSucesso = await _dao.salvar(tipoManutencao);
+      await _dao.salvar(tipoManutencao);
 
       if (mounted) {
-        _mostrarDialogoDeSucesso(salvoComSucesso);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Tipo de manutenção salvo com sucesso!')),
+        );
+        Navigator.of(context).pushNamed('/lista_tipo_manutencao');
       }
     }
-  }
-
-  void _mostrarDialogoDeSucesso(TipoManutencaoDTO tipoManutencao) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Tipo de Manutenção Salvo'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[
-                Text('ID: ${tipoManutencao.id}'),
-                Text('Nome: ${tipoManutencao.nome}'),
-                Text('Descrição: ${tipoManutencao.descricao ?? 'Não informada'}'),
-                Text('Ativo: ${tipoManutencao.ativo ? 'Sim' : 'Não'}'),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pushReplacementNamed('/lista_tipo_manutencao');
-              },
-            ),
-          ],
-        );
-      },
-    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Formulário de Tipo de Manutenção'),
+        title: Text(widget.tipoManutencao == null
+            ? 'Novo Tipo de Manutenção'
+            : 'Editar Tipo de Manutenção'),
       ),
       body: SingleChildScrollView(
         child: Padding(
