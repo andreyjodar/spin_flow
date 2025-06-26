@@ -91,7 +91,7 @@ class _FormAlunoState extends State<FormAluno> {
                 Text('Nome: ${aluno.nome}'),
                 Text('Email: ${aluno.email}'),
                 Text('Data de Nascimento: ${DateFormat('dd/MM/yyyy').format(aluno.dataNascimento)}'),
-                Text('Gênero: ${aluno.genero.name}'),
+                Text('Gênero: ${aluno.genero.displayName}'),
                 Text('Telefone: ${aluno.telefone}'),
                 Text('Instagram: ${aluno.instagram ?? 'Não informado'}'),
                 Text('Ativo: ${aluno.ativo ? 'Sim' : 'Não'}'),
@@ -158,7 +158,7 @@ class _FormAlunoState extends State<FormAluno> {
                   items: Genero.values.map((Genero genero) {
                     return DropdownMenuItem<Genero>(
                       value: genero,
-                      child: Text(genero.name),
+                      child: Text(genero.displayName),
                     );
                   }).toList(),
                   onChanged: (Genero? newValue) {

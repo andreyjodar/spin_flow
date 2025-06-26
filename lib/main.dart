@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:spin_flow/telas/formularios/form_aluno.dart';
 import 'package:spin_flow/telas/formularios/form_fabricante.dart';
 import 'package:spin_flow/telas/formularios/form_sala.dart';
+import 'package:spin_flow/telas/formularios/form_tipo_manutencao.dart';
 import 'package:spin_flow/telas/formularios/form_video_aula.dart';
 import 'package:spin_flow/telas/listas/lista_fabricante.dart';
+import 'package:spin_flow/telas/listas/lista_tipo_manutencao.dart';
 import 'package:spin_flow/telas/tela_dashboard.dart';
 
 void main() {
@@ -28,6 +30,8 @@ class MyApp extends StatelessWidget {
         '/cadastro_fabricante': (context) => const FormFabricante(),
         '/cadastro_sala': (context) => const FormSala(),
         '/lista_fabricante': (context) => const ListaFabricante(),
+        '/cadastro_tipo_manutencao': (context) => const FormTipoManutencao(),
+        '/lista_tipo_manutencao': (context) => const ListaTipoManutencao(),
       },
     );
   }

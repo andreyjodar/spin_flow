@@ -8,6 +8,13 @@ CREATE TABLE fabricante (
   telefone_contato TEXT,
   ativo INTEGER NOT NULL DEFAULT 1
 );
+
+CREATE TABLE tipo_manutencao (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    descricao TEXT,
+    ativo INTEGER NOT NULL DEFAULT 1
+);
 ''';
 
 final criarTabelas = [_tabelas];
@@ -36,5 +43,32 @@ VALUES ('Clean & Cia', 'Empresa especializada em produtos de limpeza e manutenç
 '''
 INSERT INTO fabricante (nome, descricao, nome_contato_principal, email_contato, telefone_contato, ativo) 
 VALUES ('Ciclo Total SA', 'Antiga fornecedora de bikes, agora com operações encerradas.', 'Marcos Pereira', 'arquivo@ciclototal.com', '(51) 91111-2222', 0);
+'''
+];
+
+final insertTiposManutencao = [
+'''
+INSERT INTO tipo_manutencao (nome, descricao, ativo) 
+VALUES ('Limpeza e Lubrificação', 'Limpeza geral da estrutura e lubrificação da corrente, pedais e partes móveis.', 1);
+''',
+
+'''
+INSERT INTO tipo_manutencao (nome, descricao, ativo) 
+VALUES ('Ajuste de Tensão', 'Verificação e ajuste da tensão da correia ou corrente para garantir a resistência correta.', 1);
+''',
+
+'''
+INSERT INTO tipo_manutencao (nome, descricao, ativo) 
+VALUES ('Revisão Eletrônica', 'Checagem do painel digital, sensores de velocidade e monitores cardíacos da bicicleta.', 1);
+''',
+
+'''
+INSERT INTO tipo_manutencao (nome, descricao, ativo) 
+VALUES ('Troca de Peças de Desgaste', 'Substituição de itens com desgaste natural, como selim, pedais e sapatas de freio.', 1);
+''',
+
+'''
+INSERT INTO tipo_manutencao (nome, descricao, ativo) 
+VALUES ('Calibração de Sensores', 'Manutenção obsoleta, substituída pela "Revisão Eletrônica".', 0);
 '''
 ];
