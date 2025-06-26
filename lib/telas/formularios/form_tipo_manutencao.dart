@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spin_flow/banco/dao/dao_tipo_manutencao.dart';
 import 'package:spin_flow/dto/dto_tipo_manutencao.dart'; 
 
 class FormTipoManutencao extends StatefulWidget {
@@ -12,6 +13,7 @@ class _FormTipoManutencaoState extends State<FormTipoManutencao> {
   final _formKey = GlobalKey<FormState>();
   final _nomeController = TextEditingController();
   final _descricaoController = TextEditingController();
+  final DAOTipoManutencao _dao = DAOTipoManutencao();
   bool _ativo = true;
 
   @override
@@ -21,7 +23,7 @@ class _FormTipoManutencaoState extends State<FormTipoManutencao> {
     super.dispose();
   }
 
-  void _salvar() {
+  void _salvar() async {
     if (_formKey.currentState?.validate() ?? false) {
       final tipoManutencao = TipoManutencaoDTO(
         nome: _nomeController.text,
@@ -31,7 +33,11 @@ class _FormTipoManutencaoState extends State<FormTipoManutencao> {
         ativo: _ativo,
       );
 
-      _mostrarDialogoDeSucesso(tipoManutencao);
+      final salvoComSucesso = await _dao.salvar(tipoManutencao);
+
+      if (mounted) {
+        _mostrarDialogoDeSucesso(salvoComSucesso);
+      }
     }
   }
 
@@ -44,6 +50,7 @@ class _FormTipoManutencaoState extends State<FormTipoManutencao> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
+                Text('ID: ${tipoManutencao.id}'),
                 Text('Nome: ${tipoManutencao.nome}'),
                 Text('Descrição: ${tipoManutencao.descricao ?? 'Não informada'}'),
                 Text('Ativo: ${tipoManutencao.ativo ? 'Sim' : 'Não'}'),
@@ -54,7 +61,7 @@ class _FormTipoManutencaoState extends State<FormTipoManutencao> {
             TextButton(
               child: const Text('OK'),
               onPressed: () {
-                Navigator.of(context).pushNamed('/lista_tipo_manutencao');
+                Navigator.of(context).pushReplacementNamed('/lista_tipo_manutencao');
               },
             ),
           ],
