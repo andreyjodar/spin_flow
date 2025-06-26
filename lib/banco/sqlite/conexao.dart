@@ -29,6 +29,9 @@ class Conexao {
                 for (final insert in insertFabricantes) {
                   await txn.execute(insert);
                 }
+                for (final insert in insertTiposManutencao) {
+                  await txn.execute(insert);
+                }
               });
             },
           ),

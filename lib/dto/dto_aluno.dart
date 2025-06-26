@@ -30,3 +30,18 @@ enum Genero {
   outro,
   prefiroNaoInformar,
 }
+
+extension GeneroExtension on Genero {
+  String get displayName {
+    switch (this) {
+      case Genero.masculino:
+        return 'Masculino';
+      case Genero.feminino:
+        return 'Feminino';
+      case Genero.outro:
+        return 'Outro';
+      case Genero.prefiroNaoInformar:
+        return 'Prefiro não informar';
+    }
+  }
+}
